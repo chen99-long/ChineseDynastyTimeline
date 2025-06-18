@@ -3,6 +3,9 @@ import { X, Calendar, MapPin, Crown, Users, Award, Scroll, Sparkles, Heart } fro
 import { Dynasty } from '../data/dynasties';
 import HistoricalMap from './HistoricalMap';
 import CharacterNetwork from './CharacterNetwork';
+import HistoricalEvents from './HistoricalEvents';
+import CulturalArtifacts from './CulturalArtifacts';
+import InteractiveQuiz from './InteractiveQuiz';
 
 interface DynastyDetailProps {
   dynasty: Dynasty;
@@ -108,6 +111,15 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
 
               {/* 人物关系图 */}
               <CharacterNetwork dynasty={dynasty} />
+
+              {/* 重大历史事件 */}
+              <HistoricalEvents dynasty={dynasty} />
+
+              {/* 文化瑰宝 */}
+              <CulturalArtifacts dynasty={dynasty} />
+
+              {/* 知识测试 */}
+              <InteractiveQuiz dynasty={dynasty} />
 
               {/* 传奇故事 */}
               <div className="bg-gradient-to-br from-rose-500/10 via-pink-500/10 to-red-500/10 rounded-2xl p-8 border border-rose-400/30">
