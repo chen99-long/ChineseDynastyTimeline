@@ -49,22 +49,6 @@ const InteractiveQuiz: React.FC<InteractiveQuizProps> = ({ dynasty }) => {
           correctAnswer: 3,
           explanation: '秦始皇统一了文字、货币、度量衡等，但没有统一宗教。秦朝主要推行法家思想。',
           difficulty: 'medium'
-        },
-        {
-          id: 'q4',
-          question: '秦朝实行的政治制度是？',
-          options: ['分封制', '郡县制', '宗法制', '联邦制'],
-          correctAnswer: 1,
-          explanation: '秦朝废除分封制，实行郡县制，这是中央集权制度的重要组成部分。',
-          difficulty: 'medium'
-        },
-        {
-          id: 'q5',
-          question: '秦朝灭亡的直接原因是？',
-          options: ['自然灾害', '外族入侵', '农民起义', '宫廷政变'],
-          correctAnswer: 2,
-          explanation: '陈胜吴广起义等农民起义是秦朝灭亡的直接原因，反映了秦朝严酷统治下民众的反抗。',
-          difficulty: 'hard'
         }
       ],
       han: [
@@ -91,22 +75,102 @@ const InteractiveQuiz: React.FC<InteractiveQuizProps> = ({ dynasty }) => {
           correctAnswer: 1,
           explanation: '《史记》是由司马迁撰写的，是中国第一部纪传体通史。',
           difficulty: 'easy'
+        }
+      ],
+      three_kingdoms: [
+        {
+          id: 'q1',
+          question: '三国时期是指哪三个国家？',
+          options: ['魏蜀吴', '秦楚燕', '齐鲁晋', '赵韩魏'],
+          correctAnswer: 0,
+          explanation: '三国时期是指魏、蜀、吴三个国家，分别由曹操、刘备、孙权建立。',
+          difficulty: 'easy'
         },
         {
-          id: 'q4',
-          question: '汉武帝时期"罢黜百家，独尊儒术"的提出者是？',
-          options: ['董仲舒', '朱买臣', '公孙弘', '卫青'],
-          correctAnswer: 0,
-          explanation: '董仲舒提出了"罢黜百家，独尊儒术"的建议，被汉武帝采纳。',
+          id: 'q2',
+          question: '赤壁之战发生在哪一年？',
+          options: ['公元200年', '公元208年', '公元220年', '公元234年'],
+          correctAnswer: 1,
+          explanation: '赤壁之战发生在公元208年，孙刘联军大败曹操，奠定了三国鼎立的格局。',
           difficulty: 'medium'
         },
         {
-          id: 'q5',
-          question: '汉朝分为西汉和东汉，分界的标志性事件是？',
-          options: ['王莽篡汉', '黄巾起义', '七国之乱', '巫蛊之祸'],
+          id: 'q3',
+          question: '诸葛亮的《出师表》是写给谁的？',
+          options: ['刘备', '刘禅', '关羽', '张飞'],
+          correctAnswer: 1,
+          explanation: '《出师表》是诸葛亮写给蜀汉后主刘禅的奏章，表达了北伐的决心。',
+          difficulty: 'medium'
+        }
+      ],
+      jin: [
+        {
+          id: 'q1',
+          question: '晋朝的开国皇帝是谁？',
+          options: ['司马懿', '司马师', '司马昭', '司马炎'],
+          correctAnswer: 3,
+          explanation: '司马炎是晋朝的开国皇帝，史称晋武帝，统一了三国。',
+          difficulty: 'easy'
+        },
+        {
+          id: 'q2',
+          question: '《兰亭序》的作者是谁？',
+          options: ['王羲之', '王献之', '谢安', '陶渊明'],
           correctAnswer: 0,
-          explanation: '王莽篡汉建立新朝，后来刘秀重建汉朝（东汉），这是西汉和东汉的分界。',
-          difficulty: 'hard'
+          explanation: '《兰亭序》是王羲之的书法杰作，被誉为"天下第一行书"。',
+          difficulty: 'easy'
+        },
+        {
+          id: 'q3',
+          question: '"采菊东篱下，悠然见南山"出自谁的诗？',
+          options: ['王羲之', '谢安', '陶渊明', '祖逖'],
+          correctAnswer: 2,
+          explanation: '这句诗出自陶渊明的《饮酒》，体现了他归隐田园的生活态度。',
+          difficulty: 'medium'
+        }
+      ],
+      southern_northern: [
+        {
+          id: 'q1',
+          question: '南北朝时期南朝包括哪四个朝代？',
+          options: ['宋齐梁陈', '魏晋隋唐', '夏商周秦', '汉魏晋宋'],
+          correctAnswer: 0,
+          explanation: '南朝包括宋、齐、梁、陈四个朝代，都建都在建康（今南京）。',
+          difficulty: 'medium'
+        },
+        {
+          id: 'q2',
+          question: '北魏孝文帝推行汉化改革的主要目的是什么？',
+          options: ['征服南朝', '促进民族融合', '发展经济', '加强军事'],
+          correctAnswer: 1,
+          explanation: '孝文帝推行汉化改革的主要目的是促进胡汉民族融合，加强统治。',
+          difficulty: 'medium'
+        }
+      ],
+      sui: [
+        {
+          id: 'q1',
+          question: '隋朝的开国皇帝是谁？',
+          options: ['杨坚', '杨广', '杨勇', '杨素'],
+          correctAnswer: 0,
+          explanation: '杨坚是隋朝的开国皇帝，史称隋文帝，结束了南北分裂局面。',
+          difficulty: 'easy'
+        },
+        {
+          id: 'q2',
+          question: '大运河的开凿主要是在哪个皇帝时期？',
+          options: ['隋文帝', '隋炀帝', '唐太宗', '唐高宗'],
+          correctAnswer: 1,
+          explanation: '大运河主要是在隋炀帝时期开凿的，连接了南北水运。',
+          difficulty: 'easy'
+        },
+        {
+          id: 'q3',
+          question: '科举制度最早创立于哪个朝代？',
+          options: ['汉朝', '魏晋', '隋朝', '唐朝'],
+          correctAnswer: 2,
+          explanation: '科举制度最早创立于隋朝，为后世的人才选拔制度奠定了基础。',
+          difficulty: 'medium'
         }
       ],
       tang: [
@@ -128,31 +192,33 @@ const InteractiveQuiz: React.FC<InteractiveQuizProps> = ({ dynasty }) => {
         },
         {
           id: 'q3',
-          question: '中国历史上唯一的女皇帝是？',
-          options: ['武则天', '慈禧太后', '吕后', '王政君'],
-          correctAnswer: 0,
-          explanation: '武则天是中国历史上唯一的女皇帝，建立了武周王朝。',
-          difficulty: 'easy'
-        },
-        {
-          id: 'q4',
           question: '被称为"诗仙"的唐代诗人是？',
           options: ['杜甫', '李白', '王维', '白居易'],
           correctAnswer: 1,
           explanation: '李白被称为"诗仙"，是唐代最著名的浪漫主义诗人。',
           difficulty: 'easy'
+        }
+      ],
+      five_dynasties: [
+        {
+          id: 'q1',
+          question: '五代十国时期的第一个朝代是？',
+          options: ['后梁', '后唐', '后晋', '后汉'],
+          correctAnswer: 0,
+          explanation: '后梁是五代十国时期的第一个朝代，由朱温建立。',
+          difficulty: 'medium'
         },
         {
-          id: 'q5',
-          question: '安史之乱的主要发动者是？',
-          options: ['安禄山和史思明', '黄巢', '朱温', '李克用'],
+          id: 'q2',
+          question: '"问君能有几多愁"的作者是？',
+          options: ['李煜', '李白', '杜甫', '苏轼'],
           correctAnswer: 0,
-          explanation: '安史之乱是由安禄山和史思明发动的叛乱，严重削弱了唐朝的国力。',
+          explanation: '这句词出自南唐后主李煜的《虞美人》，表达了亡国之痛。',
           difficulty: 'medium'
         }
       ]
     };
-    return quizzes[dynastyId] || quizzes.qin;
+    return quizzes[dynastyId] || [];
   };
 
   const questions = getQuizData(dynasty.id);
@@ -210,6 +276,22 @@ const InteractiveQuiz: React.FC<InteractiveQuizProps> = ({ dynasty }) => {
     if (percentage >= 50) return { level: '历史爱好者', color: 'from-blue-400 to-cyan-500', icon: '📚' };
     return { level: '历史新手', color: 'from-gray-400 to-gray-500', icon: '🌱' };
   };
+
+  if (questions.length === 0) {
+    return (
+      <div className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 rounded-2xl p-6 border border-indigo-400/30">
+        <h3 className="chinese-title text-2xl font-bold text-indigo-400 mb-6 flex items-center">
+          <Brain className="w-6 h-6 mr-3" />
+          {dynasty.name}朝知识测试
+        </h3>
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">🚧</div>
+          <p className="text-xl text-gray-300 mb-4">该朝代的测试题目正在准备中...</p>
+          <p className="text-gray-400">敬请期待更多精彩内容！</p>
+        </div>
+      </div>
+    );
+  }
 
   if (quizCompleted) {
     const scoreLevel = getScoreLevel(score, questions.length);
