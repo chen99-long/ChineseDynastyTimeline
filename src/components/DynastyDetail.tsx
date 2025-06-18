@@ -46,11 +46,23 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                 </div>
               </div>
               
+              {/* 优化后的关闭按钮 */}
               <button
                 onClick={onClose}
-                className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 flex items-center justify-center hover:scale-110 chinese-border"
+                className="group relative w-16 h-16 rounded-full bg-gradient-to-br from-red-500/80 to-red-700/80 backdrop-blur-sm border-3 border-red-300/50 hover:border-red-200 transition-all duration-300 flex items-center justify-center hover:scale-110 shadow-lg hover:shadow-xl chinese-border overflow-hidden"
               >
-                <X className="w-6 h-6" />
+                {/* 背景装饰 */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-400/20 to-red-800/20 rounded-full"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.3),transparent_60%)] rounded-full"></div>
+                
+                {/* 关闭图标 */}
+                <X className="w-7 h-7 text-white relative z-10 group-hover:rotate-90 transition-transform duration-300" />
+                
+                {/* 悬停光效 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-full"></div>
+                
+                {/* 中式装饰边框 */}
+                <div className="absolute -inset-1 border border-red-300/30 rounded-full group-hover:border-red-200/50 transition-colors duration-300"></div>
               </button>
             </div>
             
