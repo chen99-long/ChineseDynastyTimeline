@@ -205,24 +205,89 @@ const TimelineGame: React.FC<{
         { id: '4', text: '张骞出使西域', year: -138 },
         { id: '5', text: '司马迁完成史记', year: -91 }
       ],
+      three_kingdoms: [
+        { id: '1', text: '黄巾起义爆发', year: 184 },
+        { id: '2', text: '官渡之战', year: 200 },
+        { id: '3', text: '赤壁之战', year: 208 },
+        { id: '4', text: '三顾茅庐', year: 207 },
+        { id: '5', text: '蜀汉建立', year: 221 }
+      ],
+      jin: [
+        { id: '1', text: '司马炎建立西晋', year: 266 },
+        { id: '2', text: '灭吴统一天下', year: 280 },
+        { id: '3', text: '八王之乱开始', year: 291 },
+        { id: '4', text: '兰亭雅集', year: 353 },
+        { id: '5', text: '淝水之战', year: 383 }
+      ],
+      southern_northern: [
+        { id: '1', text: '刘裕篡晋建宋', year: 420 },
+        { id: '2', text: '北魏统一北方', year: 439 },
+        { id: '3', text: '孝文帝迁都洛阳', year: 494 },
+        { id: '4', text: '侯景之乱', year: 548 },
+        { id: '5', text: '北周灭北齐', year: 577 }
+      ],
+      sui: [
+        { id: '1', text: '杨坚建立隋朝', year: 581 },
+        { id: '2', text: '隋灭陈统一', year: 589 },
+        { id: '3', text: '开凿大运河', year: 605 },
+        { id: '4', text: '创立科举制', year: 605 },
+        { id: '5', text: '隋炀帝被杀', year: 618 }
+      ],
       tang: [
         { id: '1', text: '李渊建立唐朝', year: 618 },
         { id: '2', text: '贞观之治开始', year: 627 },
         { id: '3', text: '武则天称帝', year: 690 },
         { id: '4', text: '开元盛世', year: 713 },
         { id: '5', text: '安史之乱爆发', year: 755 }
+      ],
+      five_dynasties: [
+        { id: '1', text: '朱温篡唐建梁', year: 907 },
+        { id: '2', text: '李存勖灭后梁', year: 923 },
+        { id: '3', text: '石敬瑭建后晋', year: 936 },
+        { id: '4', text: '柴荣改革', year: 954 },
+        { id: '5', text: '赵匡胤陈桥兵变', year: 960 }
+      ],
+      song: [
+        { id: '1', text: '赵匡胤建立宋朝', year: 960 },
+        { id: '2', text: '杯酒释兵权', year: 961 },
+        { id: '3', text: '王安石变法', year: 1069 },
+        { id: '4', text: '靖康之变', year: 1127 },
+        { id: '5', text: '岳飞抗金', year: 1140 }
+      ],
+      yuan: [
+        { id: '1', text: '忽必烈建立元朝', year: 1271 },
+        { id: '2', text: '元灭南宋', year: 1279 },
+        { id: '3', text: '马可波罗来华', year: 1275 },
+        { id: '4', text: '元曲兴起', year: 1300 },
+        { id: '5', text: '红巾军起义', year: 1351 }
+      ],
+      ming: [
+        { id: '1', text: '朱元璋建立明朝', year: 1368 },
+        { id: '2', text: '朱棣迁都北京', year: 1421 },
+        { id: '3', text: '郑和下西洋', year: 1405 },
+        { id: '4', text: '李时珍著本草纲目', year: 1578 },
+        { id: '5', text: '李自成攻入北京', year: 1644 }
+      ],
+      qing: [
+        { id: '1', text: '努尔哈赤建后金', year: 1616 },
+        { id: '2', text: '清军入关', year: 1644 },
+        { id: '3', text: '康熙亲政', year: 1669 },
+        { id: '4', text: '乾隆盛世', year: 1735 },
+        { id: '5', text: '鸦片战争', year: 1840 }
       ]
     };
-    return timelineData[dynastyId] || timelineData.qin;
+    return timelineData[dynastyId] || [];
   };
 
   useEffect(() => {
     if (isPlaying) {
       const timelineEvents = getTimelineEvents(dynasty.id);
-      const shuffled = [...timelineEvents].sort(() => Math.random() - 0.5);
-      setEvents(shuffled);
-      setUserOrder(shuffled.map(e => e.id));
-      setStartTime(Date.now());
+      if (timelineEvents.length > 0) {
+        const shuffled = [...timelineEvents].sort(() => Math.random() - 0.5);
+        setEvents(shuffled);
+        setUserOrder(shuffled.map(e => e.id));
+        setStartTime(Date.now());
+      }
     }
   }, [dynasty.id, isPlaying]);
 
@@ -257,10 +322,20 @@ const TimelineGame: React.FC<{
     onGameEnd({ correct, total: events.length, timeSpent });
   };
 
+  if (events.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-6xl mb-4">🚧</div>
+        <p className="text-xl text-gray-300 mb-4">该朝代的时间线游戏正在准备中...</p>
+        <p className="text-gray-400">敬请期待更多精彩内容！</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h4 className="text-xl font-bold text-white mb-2">将以下历史事件按时间顺序排列</h4>
+        <h4 className="text-xl font-bold text-white mb-2">将以下{dynasty.name}朝历史事件按时间顺序排列</h4>
         <p className="text-gray-300">拖拽事件卡片来重新排序</p>
       </div>
 
@@ -330,19 +405,74 @@ const MatchingGame: React.FC<{
         { person: '司马迁', achievement: '撰写史记' },
         { person: '霍去病', achievement: '征战匈奴' }
       ],
+      three_kingdoms: [
+        { person: '刘备', achievement: '建立蜀汉' },
+        { person: '诸葛亮', achievement: '隆中对策' },
+        { person: '关羽', achievement: '千里走单骑' },
+        { person: '曹操', achievement: '挟天子以令诸侯' }
+      ],
+      jin: [
+        { person: '司马炎', achievement: '统一三国' },
+        { person: '王羲之', achievement: '兰亭序' },
+        { person: '陶渊明', achievement: '田园诗' },
+        { person: '祖逖', achievement: '闻鸡起舞' }
+      ],
+      southern_northern: [
+        { person: '刘裕', achievement: '建立南朝宋' },
+        { person: '孝文帝', achievement: '汉化改革' },
+        { person: '高欢', achievement: '东魏实权' },
+        { person: '宇文泰', achievement: '府兵制' }
+      ],
+      sui: [
+        { person: '杨坚', achievement: '重新统一' },
+        { person: '杨广', achievement: '开凿大运河' },
+        { person: '杨素', achievement: '灭陈统一' },
+        { person: '韩擒虎', achievement: '攻克建康' }
+      ],
       tang: [
         { person: '李世民', achievement: '贞观之治' },
         { person: '武则天', achievement: '女皇称帝' },
         { person: '李白', achievement: '诗仙美誉' },
         { person: '杜甫', achievement: '诗圣称号' }
+      ],
+      five_dynasties: [
+        { person: '朱温', achievement: '建立后梁' },
+        { person: '李煜', achievement: '千古词帝' },
+        { person: '柴荣', achievement: '后周改革' },
+        { person: '李存勖', achievement: '灭后梁' }
+      ],
+      song: [
+        { person: '赵匡胤', achievement: '陈桥兵变' },
+        { person: '包拯', achievement: '包青天' },
+        { person: '苏轼', achievement: '豪放词派' },
+        { person: '岳飞', achievement: '精忠报国' }
+      ],
+      yuan: [
+        { person: '忽必烈', achievement: '建立元朝' },
+        { person: '马可波罗', achievement: '东方游记' },
+        { person: '关汉卿', achievement: '元曲大家' },
+        { person: '郭守敬', achievement: '授时历' }
+      ],
+      ming: [
+        { person: '朱元璋', achievement: '建立明朝' },
+        { person: '郑和', achievement: '七下西洋' },
+        { person: '李时珍', achievement: '本草纲目' },
+        { person: '徐霞客', achievement: '地理游记' }
+      ],
+      qing: [
+        { person: '康熙', achievement: '康熙盛世' },
+        { person: '乾隆', achievement: '四库全书' },
+        { person: '纪晓岚', achievement: '学者文人' },
+        { person: '林则徐', achievement: '虎门销烟' }
       ]
     };
-    return pairData[dynastyId] || pairData.qin;
+    return pairData[dynastyId] || [];
   };
 
   useEffect(() => {
     if (isPlaying) {
-      setPairs(getMatchingPairs(dynasty.id));
+      const matchingPairs = getMatchingPairs(dynasty.id);
+      setPairs(matchingPairs);
       setMatches([]);
       setStartTime(Date.now());
     }
@@ -377,10 +507,20 @@ const MatchingGame: React.FC<{
     }
   };
 
+  if (pairs.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-6xl mb-4">🚧</div>
+        <p className="text-xl text-gray-300 mb-4">该朝代的配对游戏正在准备中...</p>
+        <p className="text-gray-400">敬请期待更多精彩内容！</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h4 className="text-xl font-bold text-white mb-2">将历史人物与其成就正确配对</h4>
+        <h4 className="text-xl font-bold text-white mb-2">将{dynasty.name}朝历史人物与其成就正确配对</h4>
         <p className="text-gray-300">先点击人物，再点击对应的成就</p>
       </div>
 
@@ -481,18 +621,29 @@ const PuzzleGame: React.FC<{
     const poems: Record<string, string[]> = {
       qin: ['秦王', '扫六合', '虎视', '何雄哉'],
       han: ['大风', '起兮', '云飞扬', '威加海内'],
-      tang: ['云想', '衣裳', '花想容', '春风拂槛']
+      three_kingdoms: ['滚滚', '长江', '东逝水', '浪花淘尽英雄'],
+      jin: ['采菊', '东篱下', '悠然', '见南山'],
+      southern_northern: ['南朝', '四百八十寺', '多少', '楼台烟雨中'],
+      sui: ['尽道', '隋亡', '为此河', '至今千里赖通波'],
+      tang: ['云想', '衣裳', '花想容', '春风拂槛'],
+      five_dynasties: ['问君', '能有', '几多愁', '恰似一江春水向东流'],
+      song: ['明月', '几时有', '把酒', '问青天'],
+      yuan: ['天苍苍', '野茫茫', '风吹草低', '见牛羊'],
+      ming: ['大明', '天子', '威德', '远播'],
+      qing: ['江山', '如此', '多娇', '引无数英雄竞折腰']
     };
-    return poems[dynastyId] || poems.qin;
+    return poems[dynastyId] || [];
   };
 
   useEffect(() => {
     if (isPlaying) {
       const original = getPoemData(dynasty.id);
-      const shuffled = [...original].sort(() => Math.random() - 0.5);
-      setPoem({ original, shuffled });
-      setUserOrder(shuffled);
-      setStartTime(Date.now());
+      if (original.length > 0) {
+        const shuffled = [...original].sort(() => Math.random() - 0.5);
+        setPoem({ original, shuffled });
+        setUserOrder(shuffled);
+        setStartTime(Date.now());
+      }
     }
   }, [dynasty.id, isPlaying]);
 
@@ -509,10 +660,20 @@ const PuzzleGame: React.FC<{
     onGameEnd({ correct, total: 1, timeSpent });
   };
 
+  if (poem.original.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-6xl mb-4">🚧</div>
+        <p className="text-xl text-gray-300 mb-4">该朝代的诗词拼图正在准备中...</p>
+        <p className="text-gray-400">敬请期待更多精彩内容！</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h4 className="text-xl font-bold text-white mb-2">重新组合打乱的诗词</h4>
+        <h4 className="text-xl font-bold text-white mb-2">重新组合打乱的{dynasty.name}朝诗词</h4>
         <p className="text-gray-300">点击词语来重新排列顺序</p>
       </div>
 
@@ -557,28 +718,39 @@ const MemoryGame: React.FC<{
     const cardData: Record<string, string[]> = {
       qin: ['🐉', '⚔️', '🏯', '📜'],
       han: ['🏮', '🐪', '📚', '🗡️'],
-      tang: ['🌸', '🍷', '🎭', '🏛️']
+      three_kingdoms: ['⚔️', '🛡️', '🏹', '🎭'],
+      jin: ['🖋️', '🌾', '🐓', '📖'],
+      southern_northern: ['🌺', '🏛️', '🤝', '⚖️'],
+      sui: ['🌉', '🚢', '📏', '🏛️'],
+      tang: ['🌸', '🍷', '🎭', '🏛️'],
+      five_dynasties: ['🍂', '📝', '⭐', '⚔️'],
+      song: ['🎋', '📚', '🎨', '⚖️'],
+      yuan: ['🏹', '🐎', '🎪', '📊'],
+      ming: ['🌅', '🚢', '🏯', '📖'],
+      qing: ['🦅', '👑', '📚', '🎭']
     };
-    return cardData[dynastyId] || cardData.qin;
+    return cardData[dynastyId] || [];
   };
 
   useEffect(() => {
     if (isPlaying) {
       const cardContents = getMemoryCards(dynasty.id);
-      const duplicatedCards = [...cardContents, ...cardContents];
-      const shuffledCards = duplicatedCards
-        .map((content, index) => ({
-          id: `card-${index}`,
-          content,
-          isFlipped: false,
-          isMatched: false
-        }))
-        .sort(() => Math.random() - 0.5);
-      
-      setCards(shuffledCards);
-      setMatches(0);
-      setFlippedCards([]);
-      setStartTime(Date.now());
+      if (cardContents.length > 0) {
+        const duplicatedCards = [...cardContents, ...cardContents];
+        const shuffledCards = duplicatedCards
+          .map((content, index) => ({
+            id: `card-${index}`,
+            content,
+            isFlipped: false,
+            isMatched: false
+          }))
+          .sort(() => Math.random() - 0.5);
+        
+        setCards(shuffledCards);
+        setMatches(0);
+        setFlippedCards([]);
+        setStartTime(Date.now());
+      }
     }
   }, [dynasty.id, isPlaying]);
 
@@ -627,10 +799,20 @@ const MemoryGame: React.FC<{
     }
   };
 
+  if (cards.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-6xl mb-4">🚧</div>
+        <p className="text-xl text-gray-300 mb-4">该朝代的记忆翻牌正在准备中...</p>
+        <p className="text-gray-400">敬请期待更多精彩内容！</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h4 className="text-xl font-bold text-white mb-2">记住并配对相同的卡片</h4>
+        <h4 className="text-xl font-bold text-white mb-2">记住并配对相同的{dynasty.name}朝元素卡片</h4>
         <p className="text-gray-300">点击卡片翻开，找到相同的配对</p>
         <div className="text-pink-400 font-bold mt-2">
           已配对: {matches} / {cards.length / 2}
