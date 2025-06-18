@@ -1,6 +1,11 @@
 import React from 'react';
 import { X, Calendar, MapPin, Crown, Users, Award, Scroll, Sparkles, Heart } from 'lucide-react';
 import { Dynasty } from '../data/dynasties';
+import HistoricalMap from './HistoricalMap';
+import CharacterNetwork from './CharacterNetwork';
+import HistoricalEvents from './HistoricalEvents';
+import CulturalArtifacts from './CulturalArtifacts';
+import InteractiveQuiz from './InteractiveQuiz';
 
 interface DynastyDetailProps {
   dynasty: Dynasty;
@@ -14,7 +19,7 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-lg">
-      <div className="relative w-full max-w-6xl max-h-[95vh] overflow-hidden">
+      <div className="relative w-full max-w-7xl max-h-[95vh] overflow-hidden">
         {/* 主面板 */}
         <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-3xl shadow-2xl overflow-hidden border-4 border-yellow-400/50 chinese-border">
           {/* 头部 */}
@@ -41,11 +46,23 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                 </div>
               </div>
               
+              {/* 优化后的关闭按钮 */}
               <button
                 onClick={onClose}
-                className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 flex items-center justify-center hover:scale-110 chinese-border"
+                className="group relative w-16 h-16 rounded-full bg-gradient-to-br from-red-500/80 to-red-700/80 backdrop-blur-sm border-3 border-red-300/50 hover:border-red-200 transition-all duration-300 flex items-center justify-center hover:scale-110 shadow-lg hover:shadow-xl chinese-border overflow-hidden"
               >
-                <X className="w-6 h-6" />
+                {/* 背景装饰 */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-400/20 to-red-800/20 rounded-full"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.3),transparent_60%)] rounded-full"></div>
+                
+                {/* 关闭图标 */}
+                <X className="w-7 h-7 text-white relative z-10 group-hover:rotate-90 transition-transform duration-300" />
+                
+                {/* 悬停光效 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-full"></div>
+                
+                {/* 中式装饰边框 */}
+                <div className="absolute -inset-1 border border-red-300/30 rounded-full group-hover:border-red-200/50 transition-colors duration-300"></div>
               </button>
             </div>
             
@@ -101,15 +118,32 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                 </p>
               </div>
 
+              {/* 历史地图 */}
+              <HistoricalMap dynasty={dynasty} />
+
+              {/* 人物关系图 */}
+              <CharacterNetwork dynasty={dynasty} />
+
+              {/* 重大历史事件 */}
+              <HistoricalEvents dynasty={dynasty} />
+
+              {/* 文化瑰宝 */}
+              <CulturalArtifacts dynasty={dynasty} />
+
+              {/* 知识测试 */}
+              <InteractiveQuiz dynasty={dynasty} />
+
               {/* 传奇故事 */}
               <div className="bg-gradient-to-br from-rose-500/10 via-pink-500/10 to-red-500/10 rounded-2xl p-8 border border-rose-400/30">
                 <h3 className="chinese-title text-2xl font-bold text-rose-400 mb-6 flex items-center">
                   <Heart className="w-6 h-6 mr-3" />
                   传奇故事
                 </h3>
-                <p className="text-gray-200 leading-relaxed text-lg italic">
-                  {dynasty.legendaryStory}
-                </p>
+                <div className="bg-black/30 rounded-xl p-6 border border-rose-400/20">
+                  <p className="text-gray-200 leading-relaxed text-lg italic">
+                    {dynasty.legendaryStory}
+                  </p>
+                </div>
               </div>
 
               {/* 重要人物 */}
@@ -122,9 +156,9 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                   {dynasty.notableFigures.map((figure, index) => (
                     <div
                       key={index}
-                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-4 border border-amber-400/20 hover:border-amber-400/50 transition-all duration-300 hover:scale-105 text-center"
+                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-4 border border-amber-400/20 hover:border-amber-400/50 transition-all duration-300 hover:scale-105 text-center group"
                     >
-                      <p className="font-bold text-white text-lg">{figure}</p>
+                      <p className="font-bold text-white text-lg group-hover:text-amber-400 transition-colors duration-300">{figure}</p>
                     </div>
                   ))}
                 </div>
@@ -140,11 +174,11 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                   {dynasty.achievements.map((achievement, index) => (
                     <div
                       key={index}
-                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-5 border border-emerald-400/20 hover:border-emerald-400/50 transition-all duration-300 hover:scale-105"
+                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-5 border border-emerald-400/20 hover:border-emerald-400/50 transition-all duration-300 hover:scale-105 group"
                     >
                       <div className="flex items-center space-x-3">
                         <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${dynasty.gradient} pulse-glow`} />
-                        <p className="font-bold text-white text-lg">{achievement}</p>
+                        <p className="font-bold text-white text-lg group-hover:text-emerald-400 transition-colors duration-300">{achievement}</p>
                       </div>
                     </div>
                   ))}
@@ -161,9 +195,9 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
                   {dynasty.culturalElements.map((element, index) => (
                     <div
                       key={index}
-                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-4 border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 text-center"
+                      className="bg-gradient-to-br from-black/50 to-gray-900/50 rounded-xl p-4 border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 text-center group"
                     >
-                      <p className="font-bold text-white">{element}</p>
+                      <p className="font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">{element}</p>
                     </div>
                   ))}
                 </div>

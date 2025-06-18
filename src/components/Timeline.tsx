@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Sparkles, Crown, Scroll } from 'lucide-react
 import { Dynasty, dynasties } from '../data/dynasties';
 import DynastyCard from './DynastyCard';
 import DynastyDetail from './DynastyDetail';
+import ParticleBackground from './ParticleBackground';
 
 const Timeline: React.FC = () => {
   const [selectedDynasty, setSelectedDynasty] = useState<Dynasty | null>(null);
@@ -10,25 +11,6 @@ const Timeline: React.FC = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-
-  // 粒子效果
-  const createParticles = () => {
-    const particles = [];
-    for (let i = 0; i < 20; i++) {
-      particles.push(
-        <div
-          key={i}
-          className="particle"
-          style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 6}s`,
-            animationDuration: `${6 + Math.random() * 4}s`
-          }}
-        />
-      );
-    }
-    return particles;
-  };
 
   // 计算时间线比例
   const minYear = Math.min(...dynasties.map(d => d.startYear));
@@ -72,12 +54,13 @@ const Timeline: React.FC = () => {
     }
   }, []);
 
+  // 获取当前主题（基于选中或悬停的朝代）
+  const currentTheme = selectedDynasty?.id || hoveredDynasty?.id || 'default';
+
   return (
     <div className="w-full h-screen relative overflow-hidden chinese-pattern">
-      {/* 粒子背景 */}
-      <div className="particles">
-        {createParticles()}
-      </div>
+      {/* 动态粒子背景 */}
+      <ParticleBackground theme={currentTheme} />
 
       {/* 主标题区域 */}
       <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 via-black/60 to-transparent backdrop-blur-sm">
@@ -117,6 +100,18 @@ const Timeline: React.FC = () => {
                 <span className="text-sm">悬停预览</span>
               </div>
             </div>
+
+            {/* 当前选中朝代提示 */}
+            {(selectedDynasty || hoveredDynasty) && (
+              <div className="mt-4 fade-in-up">
+                <div className={`inline-flex items-center space-x-3 bg-gradient-to-r ${(selectedDynasty || hoveredDynasty)!.gradient} bg-opacity-20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30`}>
+                  <div className="text-2xl">{(selectedDynasty || hoveredDynasty)!.symbol}</div>
+                  <div className="text-white font-bold">
+                    正在浏览：{(selectedDynasty || hoveredDynasty)!.name}朝
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -217,6 +212,11 @@ const Timeline: React.FC = () => {
                 <div className="flex items-center space-x-3 text-yellow-300">
                   <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-pulse"></div>
                   <span className="font-medium">左右滚动浏览历史</span>
+                </div>
+                <div className="w-px h-6 bg-yellow-400/50"></div>
+                <div className="flex items-center space-x-3 text-yellow-300">
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
+                  <span className="font-medium">背景随朝代变化</span>
                 </div>
               </div>
             </div>
