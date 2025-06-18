@@ -209,31 +209,31 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
                     <h4 className="chinese-title text-lg font-bold text-white">
                       {event.title}
                     </h4>
-                    <div className="text-sm text-gray-300 bg-black/30 px-3 py-1 rounded-full">
+                    <div className="text-sm text-gray-200 bg-black/40 px-3 py-1 rounded-full font-medium">
                       {formatYear(event.year)}
                     </div>
                   </div>
                   
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                  <p className="text-gray-100 text-sm leading-relaxed mb-3 font-medium">
                     {event.description}
                   </p>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="text-xs text-gray-400">重要程度:</span>
+                      <span className="text-xs text-gray-300 font-medium">重要程度:</span>
                       <div className="flex space-x-1">
                         {Array.from({ length: 5 }, (_, i) => (
                           <Star
                             key={i}
                             className={`w-3 h-3 ${
-                              i < event.importance ? 'text-yellow-400 fill-current' : 'text-gray-600'
+                              i < event.importance ? 'text-yellow-400 fill-current' : 'text-gray-500'
                             }`}
                           />
                         ))}
                       </div>
                     </div>
                     
-                    <div className="text-xs text-gray-400">
+                    <div className="text-xs text-gray-200 font-medium">
                       参与者: {event.participants.slice(0, 2).join(', ')}
                       {event.participants.length > 2 && '...'}
                     </div>
@@ -269,7 +269,7 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
               
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 flex items-center justify-center text-white"
               >
                 ✕
               </button>
@@ -278,7 +278,7 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
             <div className="space-y-6">
               <div>
                 <h4 className="text-lg font-bold text-slate-400 mb-3">事件详情</h4>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-200 leading-relaxed font-medium">
                   {selectedEvent.description}
                 </p>
               </div>
@@ -289,7 +289,7 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
                   {selectedEvent.participants.map(participant => (
                     <div
                       key={participant}
-                      className="bg-gradient-to-r from-slate-600 to-slate-700 px-3 py-1 rounded-full text-white text-sm"
+                      className="bg-gradient-to-r from-slate-600 to-slate-700 px-3 py-1 rounded-full text-white text-sm font-medium"
                     >
                       {participant}
                     </div>
@@ -306,7 +306,7 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
                       className="flex items-center space-x-3 bg-black/30 rounded-lg p-3"
                     >
                       <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-gray-300">{consequence}</span>
+                      <span className="text-gray-200 font-medium">{consequence}</span>
                     </div>
                   ))}
                 </div>
