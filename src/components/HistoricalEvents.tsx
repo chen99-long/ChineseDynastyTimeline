@@ -87,6 +87,144 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
           consequences: ['史学奠基', '文学典范', '史官传统']
         }
       ],
+      three_kingdoms: [
+        {
+          id: 'yellow_turban',
+          year: 184,
+          title: '黄巾起义',
+          description: '张角领导的农民起义，标志着东汉末年动乱的开始',
+          type: 'political',
+          importance: 4,
+          participants: ['张角', '张宝', '张梁'],
+          consequences: ['东汉衰落', '群雄并起', '三国分立']
+        },
+        {
+          id: 'red_cliff',
+          year: 208,
+          title: '赤壁之战',
+          description: '孙刘联军大败曹操，奠定三国鼎立格局',
+          type: 'military',
+          importance: 5,
+          participants: ['周瑜', '诸葛亮', '曹操'],
+          consequences: ['三分天下', '曹操南征受挫', '孙刘联盟']
+        },
+        {
+          id: 'guan_du',
+          year: 200,
+          title: '官渡之战',
+          description: '曹操以少胜多，击败袁绍，统一北方',
+          type: 'military',
+          importance: 4,
+          participants: ['曹操', '袁绍', '许攸'],
+          consequences: ['曹操称霸北方', '袁绍势力衰落', '统一北方']
+        },
+        {
+          id: 'three_visits',
+          year: 207,
+          title: '三顾茅庐',
+          description: '刘备三次拜访诸葛亮，请其出山辅佐',
+          type: 'political',
+          importance: 4,
+          participants: ['刘备', '诸葛亮', '关羽', '张飞'],
+          consequences: ['蜀汉得贤相', '隆中对策', '三国鼎立']
+        }
+      ],
+      jin: [
+        {
+          id: 'unify_three_kingdoms',
+          year: 280,
+          title: '灭吴统一',
+          description: '晋武帝司马炎灭东吴，结束三国分裂局面',
+          type: 'political',
+          importance: 5,
+          participants: ['司马炎', '王濬', '杜预'],
+          consequences: ['重新统一', '结束分裂', '西晋建立']
+        },
+        {
+          id: 'eight_princes',
+          year: 291,
+          title: '八王之乱',
+          description: '司马氏宗室内部争权夺利，导致西晋衰落',
+          type: 'political',
+          importance: 4,
+          participants: ['司马亮', '司马玮', '司马伦'],
+          consequences: ['西晋衰落', '五胡乱华', '政治动荡']
+        },
+        {
+          id: 'lantingxu',
+          year: 353,
+          title: '兰亭雅集',
+          description: '王羲之等文人雅集，创作《兰亭序》',
+          type: 'cultural',
+          importance: 4,
+          participants: ['王羲之', '谢安', '孙绰'],
+          consequences: ['书法艺术巅峰', '文人雅集传统', '天下第一行书']
+        }
+      ],
+      southern_northern: [
+        {
+          id: 'liu_yu_usurp',
+          year: 420,
+          title: '刘裕篡晋',
+          description: '刘裕废晋恭帝，建立南朝宋，开启南北朝时代',
+          type: 'political',
+          importance: 4,
+          participants: ['刘裕', '晋恭帝'],
+          consequences: ['南朝开始', '东晋结束', '南北对峙']
+        },
+        {
+          id: 'xiaowen_reform',
+          year: 494,
+          title: '孝文帝改革',
+          description: '北魏孝文帝推行汉化改革，促进民族融合',
+          type: 'cultural',
+          importance: 5,
+          participants: ['孝文帝', '冯太后'],
+          consequences: ['民族融合', '汉化改革', '文化交流']
+        },
+        {
+          id: 'hou_jing_rebellion',
+          year: 548,
+          title: '侯景之乱',
+          description: '侯景叛乱，导致南朝梁衰落',
+          type: 'military',
+          importance: 3,
+          participants: ['侯景', '梁武帝'],
+          consequences: ['南朝衰落', '政治动荡', '人口锐减']
+        }
+      ],
+      sui: [
+        {
+          id: 'sui_unification',
+          year: 589,
+          title: '隋统一南北',
+          description: '隋文帝杨坚灭陈，结束近300年南北分裂',
+          type: 'political',
+          importance: 5,
+          participants: ['杨坚', '韩擒虎', '贺若弼'],
+          consequences: ['重新统一', '结束分裂', '隋朝建立']
+        },
+        {
+          id: 'grand_canal',
+          year: 605,
+          title: '开凿大运河',
+          description: '隋炀帝开凿大运河，连接南北水运',
+          type: 'economic',
+          importance: 5,
+          participants: ['隋炀帝', '宇文恺'],
+          consequences: ['南北贯通', '经济发展', '劳民伤财']
+        },
+        {
+          id: 'keju_system',
+          year: 605,
+          title: '创立科举制',
+          description: '隋朝创立科举制度，选拔人才',
+          type: 'political',
+          importance: 5,
+          participants: ['隋炀帝', '杨素'],
+          consequences: ['人才选拔', '教育发展', '社会流动']
+        }
+      ],
       tang: [
         {
           id: 'zhenguan',
@@ -118,9 +256,41 @@ const HistoricalEvents: React.FC<HistoricalEventsProps> = ({ dynasty }) => {
           participants: ['李白', '杜甫', '王维'],
           consequences: ['诗歌繁荣', '文化高峰', '艺术传承']
         }
+      ],
+      five_dynasties: [
+        {
+          id: 'zhu_wen_usurp',
+          year: 907,
+          title: '朱温篡唐',
+          description: '朱温废唐哀帝，建立后梁，唐朝灭亡',
+          type: 'political',
+          importance: 4,
+          participants: ['朱温', '唐哀帝'],
+          consequences: ['唐朝灭亡', '五代开始', '政权更迭']
+        },
+        {
+          id: 'li_cunxu_restore',
+          year: 923,
+          title: '李存勖灭梁',
+          description: '后唐庄宗李存勖灭后梁，统一北方',
+          type: 'military',
+          importance: 3,
+          participants: ['李存勖', '朱友贞'],
+          consequences: ['后梁灭亡', '后唐建立', '北方统一']
+        },
+        {
+          id: 'chai_rong_reform',
+          year: 954,
+          title: '柴荣改革',
+          description: '后周世宗柴荣推行改革，为宋朝统一奠基',
+          type: 'political',
+          importance: 4,
+          participants: ['柴荣', '王朴'],
+          consequences: ['政治改革', '经济发展', '为宋朝奠基']
+        }
       ]
     };
-    return events[dynastyId] || events.qin;
+    return events[dynastyId] || [];
   };
 
   const events = getEventsData(dynasty.id);

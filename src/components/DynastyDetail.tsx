@@ -6,6 +6,7 @@ import CharacterNetwork from './CharacterNetwork';
 import HistoricalEvents from './HistoricalEvents';
 import CulturalArtifacts from './CulturalArtifacts';
 import InteractiveQuiz from './InteractiveQuiz';
+import HistoricalGames from './HistoricalGames';
 
 interface DynastyDetailProps {
   dynasty: Dynasty;
@@ -129,6 +130,9 @@ const DynastyDetail: React.FC<DynastyDetailProps> = ({ dynasty, onClose }) => {
 
               {/* 文化瑰宝 */}
               <CulturalArtifacts dynasty={dynasty} />
+
+              {/* 历史小游戏 - 新增 */}
+              <HistoricalGames dynasty={dynasty} />
 
               {/* 知识测试 */}
               <InteractiveQuiz dynasty={dynasty} />

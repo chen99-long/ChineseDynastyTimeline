@@ -43,16 +43,6 @@ const CulturalArtifacts: React.FC<CulturalArtifactsProps> = ({ dynasty }) => {
           imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
           discoveryInfo: '各地考古发现',
           currentLocation: '各大博物馆收藏'
-        },
-        {
-          id: 'qin_seal',
-          name: '秦代印章',
-          category: 'art',
-          description: '统一的官印制度，标准化的印章文字',
-          significance: '体现了秦朝的中央集权和文字统一',
-          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
-          discoveryInfo: '考古发掘出土',
-          currentLocation: '故宫博物院等'
         }
       ],
       han: [
@@ -75,16 +65,104 @@ const CulturalArtifacts: React.FC<CulturalArtifactsProps> = ({ dynasty }) => {
           imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
           discoveryInfo: '文献传承',
           currentLocation: '各大图书馆'
+        }
+      ],
+      three_kingdoms: [
+        {
+          id: 'three_kingdoms_novel',
+          name: '三国演义',
+          category: 'literature',
+          description: '罗贯中创作的历史小说，描述三国时期的英雄故事',
+          significance: '中国古典四大名著之一，影响深远的历史小说',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '明代文学创作',
+          currentLocation: '全世界图书馆'
         },
         {
-          id: 'han_music',
-          name: '汉代乐府',
+          id: 'guan_dao',
+          name: '青龙偃月刀',
+          category: 'treasure',
+          description: '传说中关羽使用的兵器，象征忠义',
+          significance: '武圣关公的象征，忠义精神的代表',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '历史传说',
+          currentLocation: '各地关帝庙'
+        },
+        {
+          id: 'zhuge_fan',
+          name: '诸葛亮羽扇',
+          category: 'art',
+          description: '诸葛亮的标志性物品，智慧的象征',
+          significance: '代表了古代军师的智慧和风度',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '历史传说',
+          currentLocation: '文化传承'
+        }
+      ],
+      jin: [
+        {
+          id: 'lantingxu',
+          name: '兰亭序',
+          category: 'art',
+          description: '王羲之的书法杰作，被誉为天下第一行书',
+          significance: '中国书法艺术的巅峰之作，影响后世千年',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '东晋永和九年创作',
+          currentLocation: '故宫博物院（摹本）'
+        },
+        {
+          id: 'tao_poetry',
+          name: '陶渊明诗集',
+          category: 'literature',
+          description: '田园诗人陶渊明的诗歌作品',
+          significance: '开创了田园诗派，影响后世文人',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '文献传承',
+          currentLocation: '各大图书馆'
+        }
+      ],
+      southern_northern: [
+        {
+          id: 'buddhist_caves',
+          name: '佛教石窟',
+          category: 'architecture',
+          description: '云冈石窟、龙门石窟等佛教艺术瑰宝',
+          significance: '展现了南北朝时期佛教艺术的繁荣',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '南北朝时期开凿',
+          currentLocation: '山西云冈、河南龙门等'
+        },
+        {
+          id: 'folk_songs',
+          name: '南北朝民歌',
           category: 'music',
-          description: '汉朝宫廷音乐和民间歌谣',
-          significance: '保存了汉代的音乐文化和社会风貌',
+          description: '《木兰辞》等优秀民歌作品',
+          significance: '反映了南北朝时期的社会生活和民族融合',
           imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
           discoveryInfo: '文献记载',
-          currentLocation: '音乐史研究'
+          currentLocation: '文学史研究'
+        }
+      ],
+      sui: [
+        {
+          id: 'grand_canal',
+          name: '大运河',
+          category: 'architecture',
+          description: '连接南北的伟大水利工程',
+          significance: '促进了南北经济文化交流，影响至今',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '隋朝开凿',
+          currentLocation: '中国大运河沿线'
+        },
+        {
+          id: 'sui_porcelain',
+          name: '隋代瓷器',
+          category: 'art',
+          description: '隋朝时期的陶瓷工艺品',
+          significance: '展现了隋朝的手工业发展水平',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '考古发掘',
+          currentLocation: '各大博物馆'
         }
       ],
       tang: [
@@ -107,20 +185,32 @@ const CulturalArtifacts: React.FC<CulturalArtifactsProps> = ({ dynasty }) => {
           imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
           discoveryInfo: '石窟寺庙保存',
           currentLocation: '敦煌莫高窟等'
+        }
+      ],
+      five_dynasties: [
+        {
+          id: 'li_yu_ci',
+          name: '李煜词集',
+          category: 'literature',
+          description: '南唐后主李煜的词作，情真意切',
+          significance: '词的发展史上的重要作品，影响后世词人',
+          imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
+          discoveryInfo: '文献传承',
+          currentLocation: '各大图书馆'
         },
         {
-          id: 'tang_music',
-          name: '霓裳羽衣曲',
-          category: 'music',
-          description: '唐玄宗时期的宫廷舞曲，极其华美',
-          significance: '代表了唐代音乐舞蹈的最高水平',
+          id: 'five_dynasties_painting',
+          name: '五代绘画',
+          category: 'art',
+          description: '五代时期的山水画和花鸟画',
+          significance: '承上启下，为宋代绘画艺术奠定基础',
           imageUrl: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg',
-          discoveryInfo: '史书记载',
-          currentLocation: '音乐史研究'
+          discoveryInfo: '历代传承',
+          currentLocation: '故宫博物院等'
         }
       ]
     };
-    return artifacts[dynastyId] || artifacts.qin;
+    return artifacts[dynastyId] || [];
   };
 
   const artifacts = getArtifactsData(dynasty.id);

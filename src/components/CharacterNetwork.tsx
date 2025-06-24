@@ -88,6 +88,158 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
           icon: '📚'
         }
       ],
+      three_kingdoms: [
+        {
+          id: 'liubei',
+          name: '刘备',
+          role: '皇帝',
+          relationship: '核心',
+          description: '蜀汉昭烈帝，仁德之君，桃园三结义之首',
+          icon: '👑'
+        },
+        {
+          id: 'guanyu',
+          name: '关羽',
+          role: '将军',
+          relationship: '义兄',
+          description: '武圣关公，忠义无双，千里走单骑',
+          icon: '🗡️'
+        },
+        {
+          id: 'zhangfei',
+          name: '张飞',
+          role: '将军',
+          relationship: '义兄',
+          description: '燕人张翼德，勇猛无敌，长坂坡喝退曹军',
+          icon: '🛡️'
+        },
+        {
+          id: 'zhugeliang',
+          name: '诸葛亮',
+          role: '丞相',
+          relationship: '军师',
+          description: '卧龙先生，智慧化身，鞠躬尽瘁死而后已',
+          icon: '🪶'
+        },
+        {
+          id: 'caocao',
+          name: '曹操',
+          role: '丞相',
+          relationship: '对手',
+          description: '魏武帝，一代枭雄，挟天子以令诸侯',
+          icon: '👹'
+        },
+        {
+          id: 'sunquan',
+          name: '孙权',
+          role: '皇帝',
+          relationship: '对手',
+          description: '东吴大帝，江东之主，赤壁之战的胜利者',
+          icon: '🌊'
+        }
+      ],
+      jin: [
+        {
+          id: 'simayan',
+          name: '司马炎',
+          role: '皇帝',
+          relationship: '核心',
+          description: '晋武帝，统一三国，建立西晋王朝',
+          icon: '👑'
+        },
+        {
+          id: 'wangxizhi',
+          name: '王羲之',
+          role: '书法家',
+          relationship: '文人',
+          description: '书圣，《兰亭序》作者，天下第一行书',
+          icon: '🖋️'
+        },
+        {
+          id: 'taoyuanming',
+          name: '陶渊明',
+          role: '诗人',
+          relationship: '文人',
+          description: '田园诗人，不为五斗米折腰，采菊东篱下',
+          icon: '🌾'
+        },
+        {
+          id: 'zuti',
+          name: '祖逖',
+          role: '将军',
+          relationship: '武将',
+          description: '闻鸡起舞，北伐中原的英雄',
+          icon: '🐓'
+        }
+      ],
+      southern_northern: [
+        {
+          id: 'liuyu',
+          name: '刘裕',
+          role: '皇帝',
+          relationship: '核心',
+          description: '南朝宋武帝，结束东晋，开创南朝',
+          icon: '👑'
+        },
+        {
+          id: 'xiaowendi',
+          name: '孝文帝',
+          role: '皇帝',
+          relationship: '改革者',
+          description: '北魏孝文帝，推行汉化改革，促进民族融合',
+          icon: '🤝'
+        },
+        {
+          id: 'gaohuang',
+          name: '高欢',
+          role: '权臣',
+          relationship: '重臣',
+          description: '东魏权臣，实际统治者',
+          icon: '⚖️'
+        },
+        {
+          id: 'yuwentai',
+          name: '宇文泰',
+          role: '权臣',
+          relationship: '重臣',
+          description: '西魏权臣，府兵制创立者',
+          icon: '🛡️'
+        }
+      ],
+      sui: [
+        {
+          id: 'yangjiang',
+          name: '杨坚',
+          role: '皇帝',
+          relationship: '核心',
+          description: '隋文帝，结束分裂，重新统一中国',
+          icon: '👑'
+        },
+        {
+          id: 'yangguang',
+          name: '杨广',
+          role: '皇帝',
+          relationship: '继承者',
+          description: '隋炀帝，开凿大运河，但最终导致隋朝灭亡',
+          icon: '🚢'
+        },
+        {
+          id: 'yangsu',
+          name: '杨素',
+          role: '将军',
+          relationship: '重臣',
+          description: '隋朝名将，协助统一南北',
+          icon: '⚔️'
+        },
+        {
+          id: 'hanqinhu',
+          name: '韩擒虎',
+          role: '将军',
+          relationship: '武将',
+          description: '隋朝名将，灭陈统一的功臣',
+          icon: '🐅'
+        }
+      ],
       tang: [
         {
           id: 'lishimin',
@@ -121,9 +273,43 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
           description: '诗圣，现实主义诗歌大师',
           icon: '✍️'
         }
+      ],
+      five_dynasties: [
+        {
+          id: 'zhuwen',
+          name: '朱温',
+          role: '皇帝',
+          relationship: '核心',
+          description: '后梁太祖，结束唐朝，开启五代十国',
+          icon: '👑'
+        },
+        {
+          id: 'liyue',
+          name: '李煜',
+          role: '皇帝',
+          relationship: '词人',
+          description: '南唐后主，千古词帝，亡国之君',
+          icon: '📝'
+        },
+        {
+          id: 'chaiRong',
+          name: '柴荣',
+          role: '皇帝',
+          relationship: '明君',
+          description: '后周世宗，英明君主，为宋朝统一奠基',
+          icon: '⭐'
+        },
+        {
+          id: 'lixuanke',
+          name: '李存勖',
+          role: '皇帝',
+          relationship: '武将',
+          description: '后唐庄宗，灭后梁，统一北方',
+          icon: '⚔️'
+        }
       ]
     };
-    return characters[dynastyId] || characters.qin;
+    return characters[dynastyId] || [];
   };
 
   const characters = getCharacterData(dynasty.id);
@@ -135,6 +321,13 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
       case '武将': return 'from-red-400 to-pink-500';
       case '文人': return 'from-purple-400 to-indigo-500';
       case '敌对': return 'from-gray-400 to-gray-600';
+      case '义兄': return 'from-green-400 to-emerald-500';
+      case '军师': return 'from-indigo-400 to-purple-500';
+      case '对手': return 'from-orange-400 to-red-500';
+      case '改革者': return 'from-cyan-400 to-blue-500';
+      case '继承者': return 'from-pink-400 to-rose-500';
+      case '词人': return 'from-violet-400 to-purple-500';
+      case '明君': return 'from-amber-400 to-yellow-500';
       default: return 'from-green-400 to-emerald-500';
     }
   };
@@ -143,8 +336,8 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
     switch (role) {
       case '皇帝': return <Crown className="w-4 h-4" />;
       case '将军': return <Sword className="w-4 h-4" />;
-      case '丞相': case '史官': return <Scroll className="w-4 h-4" />;
-      case '诗人': return <Heart className="w-4 h-4" />;
+      case '丞相': case '史官': case '书法家': case '诗人': return <Scroll className="w-4 h-4" />;
+      case '使者': return <Heart className="w-4 h-4" />;
       default: return <Users className="w-4 h-4" />;
     }
   };
@@ -170,7 +363,7 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
         </div>
 
         {/* 人物节点网络 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative">
           {characters.map((character, index) => (
             <div
               key={character.id}
@@ -227,8 +420,8 @@ const CharacterNetwork: React.FC<CharacterNetworkProps> = ({ dynasty }) => {
         {/* 关系说明 */}
         <div className="mt-8 bg-black/50 backdrop-blur-sm rounded-xl p-4 border border-indigo-400/20">
           <h4 className="text-lg font-bold text-indigo-400 mb-3">关系类型</h4>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-            {['核心', '重臣', '武将', '文人', '继承者', '敌对'].map(type => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            {['核心', '重臣', '武将', '文人', '义兄', '军师', '对手', '敌对'].map(type => (
               <div key={type} className="flex items-center space-x-2">
                 <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${getRelationshipColor(type)}`}></div>
                 <span className="text-white">{type}</span>
