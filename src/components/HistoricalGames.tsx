@@ -208,8 +208,8 @@ const TimelineGame: React.FC<{
       three_kingdoms: [
         { id: '1', text: '黄巾起义爆发', year: 184 },
         { id: '2', text: '官渡之战', year: 200 },
-        { id: '3', text: '赤壁之战', year: 208 },
-        { id: '4', text: '三顾茅庐', year: 207 },
+        { id: '3', text: '三顾茅庐', year: 207 },
+        { id: '4', text: '赤壁之战', year: 208 },
         { id: '5', text: '蜀汉建立', year: 221 }
       ],
       jin: [
@@ -263,8 +263,8 @@ const TimelineGame: React.FC<{
       ],
       ming: [
         { id: '1', text: '朱元璋建立明朝', year: 1368 },
-        { id: '2', text: '朱棣迁都北京', year: 1421 },
-        { id: '3', text: '郑和下西洋', year: 1405 },
+        { id: '2', text: '郑和下西洋', year: 1405 },
+        { id: '3', text: '朱棣迁都北京', year: 1421 },
         { id: '4', text: '李时珍著本草纲目', year: 1578 },
         { id: '5', text: '李自成攻入北京', year: 1644 }
       ],
@@ -272,8 +272,8 @@ const TimelineGame: React.FC<{
         { id: '1', text: '努尔哈赤建后金', year: 1616 },
         { id: '2', text: '清军入关', year: 1644 },
         { id: '3', text: '康熙亲政', year: 1669 },
-        { id: '4', text: '乾隆盛世', year: 1735 },
-        { id: '5', text: '鸦片战争', year: 1840 }
+        { id: '4', text: '乾隆盛世开始', year: 1735 },
+        { id: '5', text: '鸦片战争爆发', year: 1840 }
       ]
     };
     return timelineData[dynastyId] || [];
@@ -385,10 +385,12 @@ const MatchingGame: React.FC<{
   onGameEnd: (score: GameScore) => void;
   isPlaying: boolean;
 }> = ({ dynasty, onGameEnd, isPlaying }) => {
-  const [pairs, setPairs] = useState<Array<{person: string, achievement: string}>>([]);
+  const [shuffledPersonsList, setShuffledPersonsList] = useState<string[]>([]);
+  const [shuffledAchievementsList, setShuffledAchievementsList] = useState<string[]>([]);
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
   const [selectedAchievement, setSelectedAchievement] = useState<string | null>(null);
   const [matches, setMatches] = useState<Array<{person: string, achievement: string}>>([]);
+  const [wrongAttempts, setWrongAttempts] = useState<number>(0);
   const [startTime, setStartTime] = useState<number>(0);
 
   const getMatchingPairs = (dynastyId: string) => {
@@ -472,9 +474,27 @@ const MatchingGame: React.FC<{
   useEffect(() => {
     if (isPlaying) {
       const matchingPairs = getMatchingPairs(dynasty.id);
-      setPairs(matchingPairs);
-      setMatches([]);
-      setStartTime(Date.now());
+      if (matchingPairs.length > 0) {
+        // 分别获取人物和成就列表
+        const persons = matchingPairs.map(p => p.person);
+        const achievements = matchingPairs.map(p => p.achievement);
+
+        // 使用不同的随机种子来确保两个列表的顺序不同
+        const shuffledPersonsList = [...persons].sort(() => Math.random() - 0.5);
+        const shuffledAchievementsList = [...achievements].sort(() => Math.random() - 0.5);
+
+        // 再次打乱以确保顺序完全随机
+        for (let i = 0; i < 3; i++) {
+          shuffledPersonsList.sort(() => Math.random() - 0.5);
+          shuffledAchievementsList.sort(() => Math.random() - 0.5);
+        }
+
+        setShuffledPersonsList(shuffledPersonsList);
+        setShuffledAchievementsList(shuffledAchievementsList);
+        setMatches([]);
+        setWrongAttempts(0);
+        setStartTime(Date.now());
+      }
     }
   }, [dynasty.id, isPlaying]);
 
@@ -488,17 +508,20 @@ const MatchingGame: React.FC<{
     setSelectedAchievement(selectedAchievement === achievement ? null : achievement);
     
     if (selectedPerson) {
-      const correctPair = pairs.find(p => p.person === selectedPerson && p.achievement === achievement);
+      const matchingPairs = getMatchingPairs(dynasty.id);
+      const correctPair = matchingPairs.find(p => p.person === selectedPerson && p.achievement === achievement);
       if (correctPair) {
         setMatches([...matches, correctPair]);
         setSelectedPerson(null);
         setSelectedAchievement(null);
         
-        if (matches.length + 1 === pairs.length) {
+        if (matches.length + 1 === matchingPairs.length) {
           const timeSpent = Math.floor((Date.now() - startTime) / 1000);
-          onGameEnd({ correct: pairs.length, total: pairs.length, timeSpent });
+          const finalScore = Math.max(0, matchingPairs.length - wrongAttempts);
+          onGameEnd({ correct: finalScore, total: matchingPairs.length, timeSpent });
         }
       } else {
+        setWrongAttempts(wrongAttempts + 1);
         setTimeout(() => {
           setSelectedPerson(null);
           setSelectedAchievement(null);
@@ -507,7 +530,9 @@ const MatchingGame: React.FC<{
     }
   };
 
-  if (pairs.length === 0) {
+  const matchingPairs = getMatchingPairs(dynasty.id);
+
+  if (matchingPairs.length === 0) {
     return (
       <div className="text-center py-12">
         <div className="text-6xl mb-4">🚧</div>
@@ -521,23 +546,23 @@ const MatchingGame: React.FC<{
     <div className="space-y-6">
       <div className="text-center">
         <h4 className="text-xl font-bold text-white mb-2">将{dynasty.name}朝历史人物与其成就正确配对</h4>
-        <p className="text-gray-300">先点击人物，再点击对应的成就</p>
+        <p className="text-gray-300">先点击人物，再点击对应的成就（顺序已打乱，错误会扣分）</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* 人物列表 */}
         <div className="space-y-3">
           <h5 className="text-lg font-bold text-green-400 text-center">历史人物</h5>
-          {pairs.map(pair => (
+          {shuffledPersonsList.map(person => (
             <button
-              key={pair.person}
-              onClick={() => handlePersonClick(pair.person)}
-              disabled={matches.some(m => m.person === pair.person)}
+              key={person}
+              onClick={() => handlePersonClick(person)}
+              disabled={matches.some(m => m.person === person)}
               className={`
                 w-full p-4 rounded-xl border-2 transition-all duration-300 text-left
-                ${matches.some(m => m.person === pair.person)
+                ${matches.some(m => m.person === person)
                   ? 'border-green-400 bg-green-400/20 text-green-300 cursor-not-allowed'
-                  : selectedPerson === pair.person
+                  : selectedPerson === person
                   ? 'border-green-400 bg-green-400/20 text-white'
                   : 'border-gray-600 bg-gray-800/50 text-gray-300 hover:border-green-400 hover:bg-green-400/10'
                 }
@@ -546,16 +571,16 @@ const MatchingGame: React.FC<{
               <div className="flex items-center space-x-3">
                 <div className={`
                   w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold
-                  ${matches.some(m => m.person === pair.person)
+                  ${matches.some(m => m.person === person)
                     ? 'border-green-400 bg-green-400 text-white'
-                    : selectedPerson === pair.person
+                    : selectedPerson === person
                     ? 'border-green-400 bg-green-400 text-white'
                     : 'border-gray-400 text-gray-400'
                   }
                 `}>
-                  {matches.some(m => m.person === pair.person) ? '✓' : '?'}
+                  {matches.some(m => m.person === person) ? '✓' : '?'}
                 </div>
-                <span className="font-medium">{pair.person}</span>
+                <span className="font-medium">{person}</span>
               </div>
             </button>
           ))}
@@ -564,16 +589,16 @@ const MatchingGame: React.FC<{
         {/* 成就列表 */}
         <div className="space-y-3">
           <h5 className="text-lg font-bold text-green-400 text-center">主要成就</h5>
-          {pairs.map(pair => (
+          {shuffledAchievementsList.map(achievement => (
             <button
-              key={pair.achievement}
-              onClick={() => handleAchievementClick(pair.achievement)}
-              disabled={matches.some(m => m.achievement === pair.achievement)}
+              key={achievement}
+              onClick={() => handleAchievementClick(achievement)}
+              disabled={matches.some(m => m.achievement === achievement)}
               className={`
                 w-full p-4 rounded-xl border-2 transition-all duration-300 text-left
-                ${matches.some(m => m.achievement === pair.achievement)
+                ${matches.some(m => m.achievement === achievement)
                   ? 'border-green-400 bg-green-400/20 text-green-300 cursor-not-allowed'
-                  : selectedAchievement === pair.achievement
+                  : selectedAchievement === achievement
                   ? 'border-green-400 bg-green-400/20 text-white'
                   : 'border-gray-600 bg-gray-800/50 text-gray-300 hover:border-green-400 hover:bg-green-400/10'
                 }
@@ -582,25 +607,28 @@ const MatchingGame: React.FC<{
               <div className="flex items-center space-x-3">
                 <div className={`
                   w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold
-                  ${matches.some(m => m.achievement === pair.achievement)
+                  ${matches.some(m => m.achievement === achievement)
                     ? 'border-green-400 bg-green-400 text-white'
-                    : selectedAchievement === pair.achievement
+                    : selectedAchievement === achievement
                     ? 'border-green-400 bg-green-400 text-white'
                     : 'border-gray-400 text-gray-400'
                   }
                 `}>
-                  {matches.some(m => m.achievement === pair.achievement) ? '✓' : '?'}
+                  {matches.some(m => m.achievement === achievement) ? '✓' : '?'}
                 </div>
-                <span className="font-medium">{pair.achievement}</span>
+                <span className="font-medium">{achievement}</span>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="text-center">
+      <div className="text-center space-y-2">
         <div className="text-green-400 font-bold">
-          已配对: {matches.length} / {pairs.length}
+          已配对: {matches.length} / {matchingPairs.length}
+        </div>
+        <div className="text-red-400 font-bold">
+          错误次数: {wrongAttempts}
         </div>
       </div>
     </div>
