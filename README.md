@@ -17,7 +17,7 @@
 
 ## 🚀 在线体验
 
-[点击这里体验华夏千年时间线](https://your-demo-link.com)
+[点击这里体验华夏千年时间线](https://chaodai.life/)
 
 ## 🛠️ 技术栈
 
@@ -38,10 +38,10 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-username/chinese-dynasty-timeline.git
+git clone https://github.com/chen99-long/ChineseDynastyTimeline.git
 
 # 进入项目目录
-cd chinese-dynasty-timeline
+cd ChineseDynastyTimeline
 
 # 安装依赖
 npm install
@@ -130,9 +130,9 @@ src/
 
 如果你有任何问题、建议或想法，欢迎通过以下方式联系：
 
-- 📧 Email: your-email@example.com
-- 🐙 GitHub Issues: [提交问题](https://github.com/your-username/chinese-dynasty-timeline/issues)
-- 💬 讨论区: [参与讨论](https://github.com/your-username/chinese-dynasty-timeline/discussions)
+- 📧 Email: 1422272907@qq.com
+- 🐙 GitHub Issues: [提交问题](https://github.com/chen99-long/ChineseDynastyTimeline/issues)
+- 💬 讨论区: [参与讨论](https://github.com/chen99-long/ChineseDynastyTimeline/discussions)
 
 ---
 
